@@ -1,8 +1,10 @@
 const path = require("path");
 const webpack = require("webpack");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+
 
 module.exports = {
-  entry: "./src/index.js",
+  entry:"./src/index.js",
   output: {
     path: path.resolve(__dirname, "./static/frontend"),
     filename: "[name].js",
@@ -16,6 +18,13 @@ module.exports = {
           loader: "babel-loader",
         },
       },
+      {
+        test: /\.css$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          "css-loader", "postcss-loader",
+          ],
+      },
     ],
   },
   optimization: {
@@ -27,6 +36,10 @@ module.exports = {
         // This has effect on the react lib size
         NODE_ENV: JSON.stringify("production"),
       },
+    }),
+    new MiniCssExtractPlugin({
+      filename: "../css/styles.css",
+      chunkFilename: "styles.css"
     }),
   ],
 };

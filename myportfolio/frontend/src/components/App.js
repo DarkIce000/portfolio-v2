@@ -8,7 +8,7 @@ export default class App extends Component {
 
   render() {
     return (
-        <h1>Hello world</h1>
+        <h1 className="bg-slate-500">Hello world</h1>
     );
   }
 }
